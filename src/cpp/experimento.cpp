@@ -7,30 +7,6 @@
 
 using namespace std;
 
-void ejecutarExperimento(int n, double prob) {
-    auto grafo = generarGrafo(n, prob);
-
-    cout << "=============================\n";
-    cout << "n = " << n << " | prob = " << prob << "\n";
-    cout << fixed << setprecision(4);
-
-    int rep = 100000;
-
-    int res_bt = 0;
-    double t_bt = medirTiempo([&]() {
-        res_bt = resolverBacktracking(grafo, n);
-    }, rep);
-
-    int res_gr = 0;
-    double t_gr = medirTiempo([&]() {
-        res_gr = greedyCliqueCover(grafo, n);
-    }, rep);
-
-    cout << "Backtracking -> cliques: " << res_bt << " | tiempo: " << t_bt << " ns\n";
-    cout << "Greedy       -> cliques: " << res_gr << " | tiempo: " << t_gr << " ns\n";
-}
-
-
 void ejecutarExperimentoArchivo(const string& ruta) {
     auto grafo = leerGrafoArchivo(ruta);
     int n = grafo.size();
