@@ -1,0 +1,68 @@
+\section{Definición del problema}
+
+\subsection{Descripción en lenguaje natural}
+
+El problema de \textit{Clique Cover} tiene como propósito dividir los vértices de los grafos en tantos subconjuntos como sea posible, de tal manera de que cada subconjunto sea un clique. Es decir, todo los vértices del mismo están relacionados entre si.
+
+De manera intuitiva, el objetivo seria entonces dividir los vértices en subconjuntos totalmente compatibles, logrando ademas minimizar la cantidad total de subconjuntos.
+
+\subsection{Definición formal}
+
+Sea $G = (V, E)$ un grafo no dirigido.
+
+Un subconjunto $C \subseteq V$ es una clique si:
+
+\[
+\forall u, v \in C,\; u \neq v \Rightarrow \{u,v\} \in E
+\]
+
+\textbf{Entrada:} Un grafo no dirigido $G = (V, E)$.
+
+\textbf{Salida:} Encontrar el mínimo número $k$ tal que existe una partición de $V$ en subconjuntos $C_1, C_2, \dots, C_k$, donde cada $C_i$ es una clique.
+
+Esto es, encontrar $k$ tal que:
+
+\[
+V = C_1 \cup C_2 \cup \cdots \cup C_k
+\]
+
+\[
+C_i \cap C_j = \emptyset \quad \text{para todo } i \neq j
+\]
+
+y cada $C_i$ es una clique.
+
+\textbf{Versión de decisión:} Dado un entero $k$, determinar si existe una partición de $V$ en a lo más $k$ cliques.
+
+
+\subsection{Ejemplo ilustrativo}
+
+Considérese el grafo $G = (V, E)$ con:
+\[
+V = \{1,2,3,4\}
+\]
+\[
+E = \{(1,2), (2,3), (1,3), (3,4)\}
+\]
+
+El subconjunto $\{1,2,3\}$ forma una clique, ya que todos sus vértices están conectados entre sí. El vértice $4$ solo está conectado con el vértice $3$, por lo que no puede pertenecer a esa misma clique.
+
+Una posible cobertura por cliques es:
+\[
+\{1,2,3\}, \quad \{4\}
+\]
+
+    Por lo tanto, el número mínimo de cliques necesarias para cubrir el grafo es $k = 2$.
+
+\subsection{Aplicaciones}    
+El problema de \textit{Clique Cover} se puede encontrar en muchos ámbitos prácticos en los cuales se pretenden agrupar elementos compatibles entre sí. Algunas aplicaciones destacadas son: 
+
+\begin{itemize}
+    \item \textbf{Análisis de redes sociales:} detección de comunidades en la que los individuos se encuentra todos conectados entre ellos.
+    
+    \item \textbf{Asignación de recursos:} agrupación de las tareas o de las entidades que pueden ser ejecutadas de forma concurrente.
+    
+    \item \textbf{Bioinformática:} detección de grupos de genes o proteínas que presentan interacciones completas.
+    
+    \item \textbf{Optimización y teoría de grafos:} formulaciones equivalentes como la coloración del grafo complemento, las cuales se utilizan en problemas de planificación o en particionamiento.
+\end{itemize}
