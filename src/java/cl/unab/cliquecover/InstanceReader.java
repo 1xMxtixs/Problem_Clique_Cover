@@ -37,6 +37,12 @@ public class InstanceReader {
                 aristasLeidas++;
             }
 
+            if (aristasLeidas != e) {
+                throw new IllegalArgumentException(
+                    "Se esperaban " + e + " aristas, pero se leyeron " + aristasLeidas
+                );
+            }
+
             return grafo;
         }
     }
