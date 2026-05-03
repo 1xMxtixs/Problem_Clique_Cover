@@ -1,0 +1,66 @@
+\section{Complejidad y contexto}
+El problema en cuestión esta contenido en la clase de problemas NP-completo. Se argumenta su pertenecía a la clase NP y su NP completitud.
+
+\subsection{Pertenencia a \textit{NP}}
+
+Un problema pertenece a la clase \textit{NP} si, dadas las soluciones, es posible verificar si estas soluciones son correctas en tiempo polinominal. El problema se puede ejemplificar suponiendo que tenemos como solución un conjunto de \textit{K} subconjuntos, que son los que particionan el conjunto de los vértices \textit{V}. Para verificar que una solución dada cumple con la propiedad de solución del problema, la solución debe cumplir las siguientes condiciones:
+
+\begin{itemize}
+    \item Verificar que cada vértice pertenece a exactamente un subconjunto.
+    \item Para cada subconjunto, comprobar que todos los pares de vértices están conectados entre sí, es decir, que cada subconjunto produce una clique.
+\end{itemize}
+
+La verificación de la primera condición se lleva a cabo en tiempo polinominal, porque consiste en comprobar si las aristas entre los pares de vértices dentro de cada subconjunto.
+
+Por todo lo anterior se asume que el problema de \textit{Clique Cover} pertenece a la clase \textit{NP}.
+
+\subsection{\textit{NP}-completitud}
+
+Para demostrar que el problema es \textit{NP-completo} hay que comprobar que es \textit{NP-duro}. Esto se hace llevando a cabo una reducción polinomial desde un problema que se sabe que es \textit{NP-completo}. 
+
+En esta ocasión se considerará el problema de \textit{Graph Coloring}. Este problema consiste en asignar colores a los vértices de un grafo de manera que no existan dos vértices adyacentes que estén coloreados del mismo color, y que ademas estén representados con el menor numero de colores posibles. 
+
+La demostración se realizara considerando la relación existente entre un grafo $G$ y su grafo complemento $\overline{G}$, el cual esta definido sobre el mismo conjunto de vértices, donde existe una arista entre dos vértices si y solo si dicha arista no pertenece a $E$.
+
+En este contexto, se observa que: 
+
+\begin{itemize}
+    \item Un conjunto de vértices forma un clique $G$ si y solo si se forma un conjunto independiente en $\overline{G}$.
+    \item Cubrir los vértices de $G$ con $K$ cliques es equivalente a colorear el grafo $\overline{G}$ con sus $K$ colores.
+\end{itemize}
+
+Dado que el problema \textit{Graph Coloring} es \textit{NP-completo} y existe una transformacion polinomial y el problema de \textit{Clique Cover}, se concluye que \textit{Clique Cover} en \textit{NP-duro}.
+
+Como aparte pertenece a \textit{NP} es posible llegar a la conclusión de que el problema es \textit{NP-completo}.
+
+
+\subsection{Relación con otros problemas}
+
+El problema abordado tiene una relación estrecha con otros problemas de la teoría de grafos en estos se incluyen \textit{Vertex Cover} y \textit{Graph Coloring}. Estos problemas forman la parte fundamental del conjunto de problemas de \textit{NP-completos} y comparten estructuras t transformaciones similares.  
+
+\begin{table}[h]
+\centering
+\caption{Relación entre Clique Cover, Vertex Cover y Graph Coloring}
+\begin{tabular}{|l|p{4cm}|p{3.5cm}|p{5cm}|}
+\hline
+\textbf{Problema} & \textbf{Definición} & \textbf{Objetivo} & \textbf{Relación con otros} \\ \hline
+
+Clique Cover 
+& Particionar los vértices en cliques (subgrafos completos) 
+& Minimizar el número de cliques 
+& Equivalente a Graph Coloring en el grafo complemento \\ \hline
+
+Vertex Cover 
+& Conjunto de vértices que cubre todas las aristas 
+& Minimizar el número de vértices 
+& Complementario de Independent Set \\ \hline
+
+Graph Coloring 
+& Asignar colores a vértices sin que adyacentes compartan color 
+& Minimizar el número de colores 
+& Equivalente a Clique Cover en el complemento \\ \hline
+
+\end{tabular}
+\end{table}
+
+

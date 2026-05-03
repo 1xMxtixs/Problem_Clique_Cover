@@ -1,0 +1,69 @@
+\section{Modelado matemático}
+El problema abordado puede formularse como un modelo de programación lineal entera. El objetivo de este problema consiste en asignar un vértice a un clique, de forma que se cumplan las condiciones de compatibilidad y se minimice el número total de cliques utilizadas.
+
+\subsection{Conjuntos y parámetros}
+En esta sección se define los distintos elementos a considerar como básicos en el modelo, el grafo entrada y los indices a gestionar , los cuales se utilizan para representar las posibles cliques.
+
+Sea $G = (V, E)$ un grafo no dirigido, donde:
+\begin{itemize}
+    \item $V$ es el conjunto de vértices, con $|V| = n$
+    \item $E$ es el conjunto de aristas
+    \item $K = \{1,2,\dots,n\}$ es el conjunto de posibles cliques (cota superior)
+\end{itemize}
+
+\subsection{Variables de Decisión}
+
+Las variables de decisión permiten representar la asignación de los vértices a las cliques y determinar cuales de ellos encuentran efectivamente en la solución.
+
+\begin{itemize}
+    \item $x_{ik} \in \{0,1\}$: vale 1 si el vértice $i \in V$ es asignado a la clique $k \in K$, y 0 en caso contrario.
+    \item $y_k \in \{0,1\}$: vale 1 si la clique $k \in K$ es utilizada, y 0 en caso contrario.
+\end{itemize}
+
+\subsection{Restricciones}
+
+Las siguientes restricciones garantizan que la solución represente una partición valida en cliques, la cual respete la asignación de los vértices que dan a la solución y la forma del grafo.
+
+\textbf{1. Asignación única de vértices}
+
+Cada vértice debe pertenecer exactamente a una clique:
+\[
+\sum_{k \in K} x_{ik} = 1 \quad \forall i \in V
+\]
+
+\textbf{2. Activación de cliques}
+
+Un vértice solo puede ser asignado a una clique si esta está activa:
+\[
+x_{ik} \leq y_k \quad \forall i \in V, \; \forall k \in K
+\]
+
+\textbf{3. Condición de clique}
+
+Dos vértices que no están conectados no pueden pertenecer a la misma clique:
+\[
+x_{ik} + x_{jk} \leq 1 \quad \forall (i,j) \notin E,\; i \neq j,\; \forall k \in K
+\]
+
+\subsection{Función objetivo}
+
+Con las variables de decisión se tienen las condiciones de presentar la asignación de los vértices a las cliques y determinar si estas efectivamente aparecen en la solución. 
+
+\vspace{0.5cm}
+
+Minimizar la cantidad de cliques necesarias para cubrir los vértices de un grafo:
+
+\[
+\min \sum_{k \in K} y_k
+\]
+
+\subsection{Versión de decisión}
+
+La forma de decisión del problema ofrece la posibilidad de contrastar la existencia de una solución restringida a un numero máximo de cliques 
+
+Dado un entero $p$, se desea determinar si existe una solución factible tal que:
+\[
+\sum_{k \in K} y_k \leq p
+\]
+
+cumpliendo todas las restricciones anteriores.
