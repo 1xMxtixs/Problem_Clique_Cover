@@ -10,7 +10,6 @@ int main() {
     cout << "Ingrese la ruta del grafo: ";
     getline(cin, ruta);
 
-    // 🔥 eliminar comillas si existen
     if (!ruta.empty() && ruta.front() == '"' && ruta.back() == '"') {
         ruta = ruta.substr(1, ruta.size() - 2);
     }
