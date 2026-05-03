@@ -1,0 +1,76 @@
+\section{Implementación}
+
+En esta sección se plantea la descripción de la forma de implementar los enfoques propuestos para resolver el problema \textit{Clique Cover} en los lenguajes de programación C++, Java y Python, teniendo tanto una solución base como una solución mejorada, gracias a las técnicas de backtracking a las estrategias heurísticas.
+
+\subsection{Enfoque base: Backtracking}
+
+La solución base en los tres lenguajes corresponde a un algoritmo de \textit{backtracking}, el cual explora un espacio de soluciones de manera sistemática.
+
+El algoritmo construye la solución a partir de la asignación de vértices a cliques de manera incrementable. En cada paso:
+
+\begin{itemize}
+    \item Se selecciona un vértice no asignado.
+    \item Se intenta ubicarlo en alguna de las cliques existentes.
+    \item Se verifica que el vértice sea adyacente a todos los miembros de la clique.
+    \item Si no es posible, se crea una nueva clique.
+\end{itemize}
+
+Si en algún momento no es posible continuar, el algoritmo hace retroceso \textit{backtrack} y prueba otra configuración.
+
+Este enfoque garantiza que se encuentre la solución óptima, pero también presenta una complejidad exponencial.
+
+\subsection{Enfoque mejorado: Greedy}
+
+Para lograr mejorar el rendimiento, se incorporó una estrategia de tipo \textit{Greedy} que guía el proceso de la búsqueda.
+
+En vez de explorar todas las configuraciones posibles, este algoritmo:
+
+\begin{itemize}
+    \item Intenta primero asignar vértices a cliques ya existentes.
+    \item Minimiza la creación de nuevas cliques.
+    \item Prioriza configuraciones que reduzcan rápidamente el número total de cliques.
+\end{itemize}
+
+Ademas, en las implementaciones de Java y Python se utiliza una estrategia de \textit{profundización iterativa}, donde se resuelve el problema de decisión:
+
+\begin{center}
+¿Es posible cubrir el grafo con $K$ cliques?
+\end{center}
+
+Comenzando primero desde valores pequeños de $K$. El algoritmo se detiene cuando encuentra el primer valor que sea factible, el cual corresponde a la solución óptima.
+
+\subsection{Implementación en C++}
+
+La implementación en C++ combina tanto backtracking como poda (\textit{branch and bound}):
+
+\begin{itemize}
+    \item Se mantiene una cota superior del número de cliques.
+    \item Se descartan ramas que no pueden mejorar la mejor solución encontrada.
+    \item Se utilizan estructuras eficientes como \texttt{bitset} para verificar adyacencias.
+\end{itemize}
+
+Este ultimo enfoque es mas exhaustivo, pero altamente óptimo a nivel de ejecución.
+
+\subsection{Implementación en Java}
+
+La implementación en Java utiliza la técnica de backtracking guiado por una profundización iterativa:
+
+\begin{itemize}
+    \item Se evalúan valores crecientes de $K$.
+    \item Se detiene al encontrar la primera solución factible.
+    \item Se beneficia de optimizaciones de la JVM (JIT).
+\end{itemize}
+
+Este ultimo enfoque reduce de manera significativa en espacio de la búsqueda.
+
+\subsection{Implementación en Python}
+
+La implementación en Python sigue exactamente la misma lógica de Java:
+
+\begin{itemize}
+    \item Backtracking con criterio de parada temprana.
+    \item Exploración limitada del espacio de soluciones.
+\end{itemize}
+
+Sin embargo, esta implementación debido a su naturaleza interpretada presenta un menor rendimiento en comparación a los otros lenguaje de programación.
+

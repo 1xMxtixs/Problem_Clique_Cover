@@ -5,16 +5,31 @@
 
 \begin{document}
 
-% 1. Insertamos la portada personalizada
+% Insertamos la portada personalizada
 \input{secciones/portada}
 
-% 2. Índice automático en su propia página
+% Índice automático en su propia página
+{\hypersetup{linkcolor=black}
 \tableofcontents
+}
 \newpage
 
-% 3. Desarrollo del informe (Aquí iremos agregando el resto)
+% Desarrollo del informe (Aquí iremos agregando el resto)
+
+\input{secciones/introduccion}
+\newpage
 \input{secciones/definicionProblema}
+\newpage
 \input{secciones/modeladoMatematico}
+\newpage
 \input{secciones/complejidadYContexto}
+\newpage
+\input{secciones/implementacion}
+\newpage
+\input{secciones/analisisExperimental}
+\newpage
+\input{secciones/conclusion}
+\newpage
+\input{secciones/bibliografia}
 
 \end{document}
