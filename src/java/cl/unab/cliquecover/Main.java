@@ -3,8 +3,6 @@ package cl.unab.cliquecover;
 public class Main {
 
     public static void main(String[] args) {
-        // Por defecto, leeremos un archivo de prueba.
-        // Si le pasas un argumento por consola, leerá ese.
         String rutaArchivo = "test.txt"; 
         
         if (args.length > 0) {
@@ -16,25 +14,36 @@ public class Main {
             System.out.println("Iniciando prueba de Clique Cover");
             System.out.println("Instancia: " + rutaArchivo);
             
-            // 1. Cargar el grafo
             Grafo grafo = InstanceReader.leerArchivo(rutaArchivo);
             System.out.println("Grafo cargado con éxito: " + grafo.getV() + " vértices y " + grafo.getE() + " aristas.");
+            System.out.println("=========================================\n");
 
-            // 2. Resolver con Fuerza Bruta
-            FuerzaBruta solver = new FuerzaBruta();
+            // --- Solución Base (Backtracking) ---
             
-            System.out.println("Calculando mínimo de cliques... (Fuerza Bruta)");
-            long tiempoInicio = System.currentTimeMillis();
-            
-            int minimoCliques = solver.resolver(grafo);
-            
-            long tiempoFin = System.currentTimeMillis();
-            long tiempoTotal = tiempoFin - tiempoInicio;
+            System.out.println(">> Ejecutando Solución Base (Backtracking)...");
+            Backtracking solverBase = new Backtracking ();
+            long inicioBase = System.nanoTime();
 
-            // 3. Mostrar resultados
-            System.out.println("-----------------------------------------");
-            System.out.println("RESULTADO: Se necesitan " + minimoCliques + " cliques.");
-            System.out.println("TIEMPO   : " + tiempoTotal + " milisegundos.");
+            int optimo = solverBase.resolver(grafo);
+            long finBase = System.nanoTime();
+            double tiempoBaseMs = (finBase - inicioBase) / 1_000_000.0;
+
+            System.out.println("RESULTADO BASE: " + optimo + " cliques.");
+            System.out.println("TIEMPO BASE   : " + String.format("%.4f", tiempoBaseMs) + " ms.\n");
+
+            // --- Solución Mejorada (Greedy) ---
+
+            System.out.println(">> Ejecutando Solución Mejorada (Greedy)...");
+            HeuristicaGreedy solverGreedy = new HeuristicaGreedy();
+            long inicioGreedy = System.nanoTime();
+
+            int aproximado = solverGreedy.resolver(grafo);
+
+            long finGreedy = System.nanoTime();
+            double tiempoGreedyMs = (finGreedy - inicioGreedy) / 1_000_000.0;
+
+            System.out.println("RESULTADO GREEDY: " + aproximado + " cliques.");
+            System.out.println("TIEMPO GREEDY   : " + String.format("%.4f", tiempoGreedyMs) + " ms.");
             System.out.println("=========================================");
 
         } catch (Exception e) {
