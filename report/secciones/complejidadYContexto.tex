@@ -1,16 +1,16 @@
 \section{Complejidad y contexto}
-El problema en cuestión esta contenido en la clase de problemas NP-completo. Se argumenta su pertenecía a la clase NP y su NP completitud.
+El problema en cuestión esta contenido en la clase de problemas NP-completo. Se argumenta su pertenencia a la clase NP y su NP completitud.
 
 \subsection{Pertenencia a \textit{NP}}
 
-Un problema pertenece a la clase \textit{NP} si, dadas las soluciones, es posible verificar si estas soluciones son correctas en tiempo polinominal. El problema se puede ejemplificar suponiendo que tenemos como solución un conjunto de \textit{K} subconjuntos, que son los que particionan el conjunto de los vértices \textit{V}. Para verificar que una solución dada cumple con la propiedad de solución del problema, la solución debe cumplir las siguientes condiciones:
+Un problema pertenece a la clase \textit{NP} si, dadas las soluciones, es posible verificar si estas soluciones son correctas en tiempo polinomial. El problema se puede ejemplificar suponiendo que se tiene como solución un conjunto de \textit{K} subconjuntos, que son los que particionan el conjunto de los vértices \textit{V}. Para verificar que una solución dada cumple con la propiedad de solución del problema, la solución debe cumplir las siguientes condiciones:
 
 \begin{itemize}
     \item Verificar que cada vértice pertenece a exactamente un subconjunto.
     \item Para cada subconjunto, comprobar que todos los pares de vértices están conectados entre sí, es decir, que cada subconjunto produce una clique.
 \end{itemize}
 
-La verificación de la primera condición se lleva a cabo en tiempo polinominal, porque consiste en comprobar si las aristas entre los pares de vértices dentro de cada subconjunto.
+La verificación de la primera condición se lleva a cabo en tiempo polinomial, porque consiste en comprobar si las aristas entre los pares de vértices dentro de cada subconjunto.
 
 Por todo lo anterior se asume que el problema de \textit{Clique Cover} pertenece a la clase \textit{NP}.
 
@@ -29,9 +29,9 @@ En este contexto, se observa que:
     \item Cubrir los vértices de $G$ con $K$ cliques es equivalente a colorear el grafo $\overline{G}$ con sus $K$ colores.
 \end{itemize}
 
-Dado que el problema \textit{Graph Coloring} es \textit{NP-completo} y existe una transformacion polinomial y el problema de \textit{Clique Cover}, se concluye que \textit{Clique Cover} en \textit{NP-duro}.
+Dado que el problema \textit{Graph Coloring} es \textit{NP-completo} y existe una transformación polinomial entre este y el problema de \textit{Clique Cover}, se concluye que \textit{Clique Cover} es \textit{NP-duro}.
 
-Como aparte pertenece a \textit{NP} es posible llegar a la conclusión de que el problema es \textit{NP-completo}.
+Como además se demostró anteriormente que dicho problema pertenece a \textit{NP} es posible llegar a la conclusión de que \textit{Clique Cover} es \textit{NP-completo}.
 
 
 \subsection{Relación con otros problemas}
@@ -41,7 +41,8 @@ El problema abordado tiene una relación estrecha con otros problemas de la teor
 \begin{table}[h]
 \centering
 \caption{Relación entre Clique Cover, Vertex Cover y Graph Coloring}
-\begin{tabular}{|l|p{4cm}|p{3.5cm}|p{5cm}|}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|l|p{4.5cm}|p{3.5cm}|p{4.5cm}|}
 \hline
 \textbf{Problema} & \textbf{Definición} & \textbf{Objetivo} & \textbf{Relación con otros} \\ \hline
 
@@ -61,6 +62,9 @@ Graph Coloring
 & Equivalente a Clique Cover en el complemento \\ \hline
 
 \end{tabular}
+\\
+\vspace{0.15cm}
+\small \textit{Fuente: Elaboración propia basada en Computers and Intractability: A Guide to the Theory of NP-Completeness \cite{garey1979}.}
 \end{table}
 
 

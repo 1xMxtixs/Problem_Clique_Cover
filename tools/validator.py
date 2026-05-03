@@ -1,7 +1,6 @@
 import sys
 import os
 
-# Secuencias ANSI para colores en la consola
 class Colors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -12,7 +11,6 @@ class Colors:
     BOLD = '\033[1m'
 
 def cargar_grafo(ruta_instancia):
-    """Lee el archivo .txt original y arma el grafo como un diccionario de adyacencia."""
     grafo = {}
     try:
         with open(ruta_instancia, 'r') as f:
@@ -21,18 +19,15 @@ def cargar_grafo(ruta_instancia):
             if not lineas:
                 raise ValueError("El archivo del grafo está vacío.")
 
-            # Asumiendo que la primera línea tiene "V E"
             partes = lineas[0].strip().split()
             if len(partes) != 2:
                 raise ValueError("La primera línea debe contener 'V E' (cantidad de vértices y aristas).")
 
             v, e = map(int, partes)
             
-            # Inicializar el grafo vacío
             for i in range(v):
                 grafo[i] = set()
                 
-            # Leer las aristas
             aristas_leidas = 0
             for linea in lineas[1:]:
                 if linea.strip():
@@ -52,15 +47,13 @@ def cargar_grafo(ruta_instancia):
         sys.exit(1)
 
 def cargar_solucion(ruta_solucion):
-    """Lee el archivo de solución. Cada línea debe ser un clique con los vértices separados por espacio."""
     cliques = []
     try:
         with open(ruta_solucion, 'r') as f:
             for linea in f:
                 if linea.strip():
-                    # Convierte la línea "0 2 5" en una lista [0, 2, 5]
                     clique = list(map(int, linea.strip().split()))
-                    if clique: # Ignorar líneas que solo tenían espacios
+                    if clique: 
                         cliques.append(clique)
         return cliques
     except FileNotFoundError:
@@ -82,50 +75,43 @@ def validar(ruta_instancia, ruta_solucion):
     vertices_duplicados = set()
     valido = True
     
-    # 1. Validar que cada grupo sea realmente un clique y que estén en rango
     for idx, clique in enumerate(cliques):
         for i in range(len(clique)):
             u = clique[i]
             
-            # Verificar si el vértice existe en el grafo
             if u < 0 or u >= total_vertices:
-                print(f"{Colors.FAIL}❌ ERROR: El vértice {u} en el clique {idx} no existe en el grafo (rango 0 a {total_vertices-1}).{Colors.ENDC}")
+                print(f"{Colors.FAIL}ERROR: El vértice {u} en el clique {idx} no existe en el grafo (rango 0 a {total_vertices-1}).{Colors.ENDC}")
                 valido = False
                 continue
 
-            # Verificar si el vértice ya está en otro clique (partición)
             if u in vertices_vistos:
                 vertices_duplicados.add(u)
                 
             vertices_vistos.add(u)
 
-            # Verificar las aristas con el resto del clique
             for j in range(i + 1, len(clique)):
                 v = clique[j]
                 if v not in grafo.get(u, set()):
-                    print(f"{Colors.FAIL}❌ ERROR CRÍTICO: El grupo {idx} NO es un clique. Los vértices {u} y {v} no están conectados por una arista.{Colors.ENDC}")
+                    print(f"{Colors.FAIL}ERROR CRÍTICO: El grupo {idx} NO es un clique. Los vértices {u} y {v} no están conectados por una arista.{Colors.ENDC}")
                     valido = False
         
-    # 2. Validar que un vértice no pertenezca a más de un clique (Partición)
     if vertices_duplicados:
-        print(f"{Colors.WARNING}⚠️ ADVERTENCIA: La solución tiene vértices solapados en múltiples cliques: {vertices_duplicados}{Colors.ENDC}")
+        print(f"{Colors.WARNING}ADVERTENCIA: La solución tiene vértices solapados en múltiples cliques: {vertices_duplicados}{Colors.ENDC}")
         print(f"{Colors.WARNING}Para el problema estricto de 'Clique Cover', cada vértice debe pertenecer a un ÚNICO clique (debe ser una partición).{Colors.ENDC}")
         valido = False
 
-    # 3. Validar que no falte ningún vértice por asignar
     if len(vertices_vistos) != total_vertices:
         faltantes = set(range(total_vertices)) - vertices_vistos
         if faltantes:
-            print(f"{Colors.FAIL}❌ ERROR: Faltaron vértices por cubrir. Vértices sin clique: {faltantes}{Colors.ENDC}")
+            print(f"{Colors.FAIL}ERROR: Faltaron vértices por cubrir. Vértices sin clique: {faltantes}{Colors.ENDC}")
             valido = False
             
-    # Resultado Final
     print("-" * 30)
     if valido:
-        print(f"{Colors.OKGREEN}{Colors.BOLD}✅ ¡SOLUCIÓN VÁLIDA!{Colors.ENDC}")
+        print(f"{Colors.OKGREEN}{Colors.BOLD}¡SOLUCIÓN VÁLIDA!{Colors.ENDC}")
         print(f"{Colors.OKGREEN}Se cubrieron los {total_vertices} vértices usando {len(cliques)} cliques perfectamente.{Colors.ENDC}")
     else:
-        print(f"{Colors.FAIL}{Colors.BOLD}❌ SOLUCIÓN INVÁLIDA.{Colors.ENDC} Revisa los errores listados arriba.")
+        print(f"{Colors.FAIL}{Colors.BOLD}SOLUCIÓN INVÁLIDA.{Colors.ENDC} Revisa los errores listados arriba.")
         
     return valido
 

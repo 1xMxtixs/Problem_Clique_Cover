@@ -1,14 +1,23 @@
 {
     "cSpell.words": [
+        "adyacencias",
+        "backtracking",
         "Backtracking",
         "Bioinformática",
+        "bound",
         "clique",
         "cliques",
         "Coloring",
         "Cover",
         "genes",
+        "Greedy",
+        "heurística",
+        "heurísticas",
+        "optimalidad",
+        "overhead",
         "particionamiento",
         "polinomial",
-        "polinominal"
+        "polinominal",
+        "ubicarlo"
     ]
 }

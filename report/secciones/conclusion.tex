@@ -1,0 +1,11 @@
+\section{Conclusión}
+
+Se pudo apreciar que el problema de Clique Cover por su naturaleza de problema NP-completo, los tiempos para hallar una solución óptima escalan de forma exponencial si se usa soluciones que buscan de forma exhaustiva los cliques óptimos, a diferencia de la solución mejorada, esta al tener un enfoque avaro, puede buscar soluciones que pueden llegar a ser óptimas o muy cercanas a esta en un tiempo infinitamente menor a la solución base.
+
+\vspace{0.5 cm}
+
+Con respecto a los lenguajes en los que se implementaron las soluciones, la forma en la que esta construido y como funciona afecta también el como opera las soluciones, se pudo ver con el diseño del algoritmo implementado en el lenguaje de programación C++ que su resultado fue  el peor para usar la solución base debido a su enfoque de mayor recorrido lo que llevo a tiempo de ejecución mas alto. Pero a su vez ser el mejor para usar la solución mejorada, a diferencia de Java que es el mejor en backtracking y Python que es mas balanceado tomando en cuenta las grandes diferencias que poseen los lenguajes de programación entre si. Dejando en evidencia la utilidad que podría tener cada uno de estos en determinados problemas, uso y enfoque con el que se quiere buscar una solución a un problema tomando en cuenta la escalabilidad de estos problemas de carácter complejo.
+
+\vspace{0.5 cm}
+
+Concluyendo, para problemas de esta naturaleza, en el que el tiempo de para encontrar una solución escala de forma exponencial a medida que el problema se hace más grande, si se quiere buscar una solución en poco tiempo y que sea cercano a lo optimo, se puede usar C++ con enfoque avaro, mientras que si se quiere la mejor solución posible aunque se tenga que esperar un poco de tiempo, es mejor usar Java con enfoque exhaustivo, dejando a Python como la peor opción a considerar ya que no se especializa ni en buscar soluciones rápidamente ni en buscar la mejor de todas.
