@@ -1,0 +1,16 @@
+# Extensiones de LaTeX a ignorar (Archivos temporales)
+*.aux
+*.log
+*.out
+*.pdf
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+
+# VS Code (Configuraciones locales que pueden causar conflictos)
+.vscode/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
