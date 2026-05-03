@@ -10,16 +10,13 @@ const int MAXN = 100;
 static int mejor;
 static vector<bitset<MAXN>> adj;
 
-// 🔥 BACKTRACKING OPTIMIZADO
 void backtrackingBB(int idx,
                     vector<bitset<MAXN>>& cliques,
                     const vector<int>& orden,
                     int n) {
 
-    // 🔥 poda fuerte
     if ((int)cliques.size() >= mejor) return;
 
-    // 🔥 caso base
     if (idx == n) {
         mejor = min(mejor, (int)cliques.size());
         return;
@@ -29,10 +26,8 @@ void backtrackingBB(int idx,
 
     int limite = cliques.size();
 
-    // 🔹 intentar meter en cliques existentes
     for (int i = 0; i < limite; i++) {
 
-        // 🔥 chequeo ultra rápido
         if ((cliques[i] & adj[nodo]) == cliques[i]) {
 
             cliques[i].set(nodo);
@@ -43,7 +38,6 @@ void backtrackingBB(int idx,
         }
     }
 
-    // 🔹 crear nuevo clique (con poda)
     if ((int)cliques.size() + 1 < mejor) {
 
         bitset<MAXN> nuevo;
@@ -57,10 +51,8 @@ void backtrackingBB(int idx,
     }
 }
 
-// 🔥 FUNCIÓN PRINCIPAL BACKTRACKING
 int resolverBacktracking(const vector<vector<int>>& grafo, int n) {
 
-    // 🔹 construir bitsets
     adj.assign(n, bitset<MAXN>());
 
     for (int i = 0; i < n; i++) {
@@ -71,7 +63,6 @@ int resolverBacktracking(const vector<vector<int>>& grafo, int n) {
         }
     }
 
-    // 🔥 ordenar nodos por grado (MUY IMPORTANTE)
     vector<int> orden(n);
     iota(orden.begin(), orden.end(), 0);
 
